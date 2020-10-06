@@ -23,9 +23,9 @@ def get_sites():
         sites = list()
         for x in lines:
             x = x.replace('\n','')
-            a = x.split('\t')
+            #a = x.split('\t')
             #print (a[0], a[1])
-            sites.append(a[0])
+            sites.append(x)
 
     return sites
 
@@ -35,9 +35,12 @@ sites = get_sites()
 sites_ranked = dict()
 #print (sites)
 for site in sites[:]:
-    rank = get_rank(site)
-    print (site, "=>" , rank)
-    sites_ranked[site] = rank
+    try:
+        rank = get_rank(site)
+        print (site, "=>" , rank)
+        sites_ranked[site] = rank
+    except:
+        continue
 
 with open('sites_ranked.csv','w') as f:
     #sites_ranked_sorted = sorted(sites_ranked.items(), key=lambda x: x[1])
